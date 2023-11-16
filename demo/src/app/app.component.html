@@ -1,0 +1,33 @@
+<header
+  class="container flex justify-between gap-8 md:gap-12 text-xl sm:text-2xl md:text-4xl lg:text-5xl"
+  transitionName="header"
+>
+  <div class="flex gap-4 md:gap-12 items-center">
+    <h1 class="font-bold">ngx-easy-view-transitions</h1>
+    <a [href]="repoUrl" class="repo-link">
+      <img
+        alt="github logo"
+        height="48"
+        ngSrc="assets/images/github-mark.svg"
+        width="48"
+    /></a>
+  </div>
+  <nav class="flex gap-4 md:gap-8 items-center">
+    <a
+      class="hover:underline [&.active-link]:underline"
+      routerLink="colors"
+      routerLinkActive="active-link"
+      >Demo</a
+    >
+    <span>|</span>
+    <a
+      class="hover:underline [&.active-link]:underline"
+      routerLink="animations"
+      routerLinkActive="active-link"
+      >Animations</a
+    >
+  </nav>
+</header>
+<main class="container">
+  <router-outlet></router-outlet>
+</main>

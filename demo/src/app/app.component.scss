@@ -1,0 +1,9 @@
+:host {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  gap: 4rem;
+  padding: 4rem;
+}
