@@ -22,7 +22,6 @@ npm install ngx-easy-view-transitions
 You have to enable Angulars built-in view transitions in the Router using the [`withViewTransitions()`](https://angular.io/api/router/withViewTransitions#usage-notes) function.
 
 ```typescript
-const appRoutes: Routes = [];
 bootstrapApplication(AppComponent,
   {
     providers: [
@@ -37,6 +36,10 @@ bootstrapApplication(AppComponent,
 ### Morph elements
 
 To morph an element during navigation from the old to the new state use the `transitionName` directive and provide the same name on both pages.
+
+```typescript
+import { TransitionNameDirective } from 'ngx-easy-view-transitions';
+```
 
 `users.component.html`
 
@@ -113,6 +116,8 @@ outAnimation = { keyframes: fadeIn, duration: 600, reverse: true };
 To start faster there are some default animations available under `DefaultTransitions.*`.
 
 ```typescript
+import { DefaultTransitions } from 'ngx-easy-view-transitions';
+
 inAnimation = { keyframes: DefaultTransitions.fadeInUp, duration: 600 };
 ```
 
@@ -121,6 +126,10 @@ You can see them in the [demo](https://derstimmler.github.io/ngx-easy-view-trans
 ### Exclude element from view transitions
 
 When you want to exclude an element form view transitions you can add the `noTransition` directive.
+
+```typescript
+import { NoTransitionDirective } from 'ngx-easy-view-transitions';
+```
 
 ```angular2html
 <img noTransition src="...">
