@@ -13,6 +13,7 @@ import { ColorsService } from './colors.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorsListComponent {
-  private _colorsService = inject(ColorsService);
-  protected colors = this._colorsService.getAll();
+  private readonly _colorsService = inject(ColorsService);
+
+  protected readonly colors = this._colorsService.getAll();
 }

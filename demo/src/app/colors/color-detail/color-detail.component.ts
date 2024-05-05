@@ -16,11 +16,12 @@ import { ColorsService } from '../colors.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorDetailComponent {
+  private readonly _colorsService = inject(ColorsService);
+  private readonly _activatedRoute = inject(ActivatedRoute);
+
   protected readonly fadeInUp = DefaultTransitions.fadeInUp;
   protected readonly fadeOutDown = DefaultTransitions.fadeOutDown;
-  private _colorsService = inject(ColorsService);
-  private _activatedRoute = inject(ActivatedRoute);
-  protected color = this._colorsService.find(
+  protected readonly color = this._colorsService.find(
     this._activatedRoute.snapshot.params['color']
   );
 }

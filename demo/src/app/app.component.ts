@@ -19,5 +19,6 @@ import { NgOptimizedImage } from '@angular/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  repoUrl = 'https://github.com/DerStimmler/ngx-easy-view-transitions';
+  protected readonly repoUrl =
+    'https://github.com/DerStimmler/ngx-easy-view-transitions';
 }
