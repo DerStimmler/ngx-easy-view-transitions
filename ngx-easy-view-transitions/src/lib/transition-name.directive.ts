@@ -37,10 +37,12 @@ export class TransitionNameDirective {
 
     //inAnimation
     effect(async () => {
-      if (!this.inAnimation()) return;
+      const inAnimation = this.inAnimation();
 
-      if ('keyframesName' in this.inAnimation()!) {
-        const animation = this.inAnimation() as CssKeyframesTransition;
+      if (!inAnimation) return;
+
+      if ('keyframesName' in inAnimation) {
+        const animation = inAnimation as CssKeyframesTransition;
         this._viewTransitionsService.setInAnimation(
           `${animation.duration}ms ${animation.keyframesName} ${
             animation.reverse ? 'reverse' : ''
@@ -49,8 +51,8 @@ export class TransitionNameDirective {
         );
       }
 
-      if ('keyframes' in this.inAnimation()!) {
-        const animation = this.inAnimation() as KeyframesTransition;
+      if ('keyframes' in inAnimation) {
+        const animation = inAnimation as KeyframesTransition;
         const keyframesName = this._keyframesService.setKeyframes(
           animation.keyframes
         );
@@ -65,10 +67,12 @@ export class TransitionNameDirective {
 
     //outAnimation
     effect(async () => {
-      if (!this.outAnimation()) return;
+      const outAnimation = this.outAnimation();
 
-      if ('keyframesName' in this.outAnimation()!) {
-        const animation = this.outAnimation() as CssKeyframesTransition;
+      if (!outAnimation) return;
+
+      if ('keyframesName' in outAnimation) {
+        const animation = outAnimation as CssKeyframesTransition;
         this._viewTransitionsService.setOutAnimation(
           `${animation.duration}ms ${animation.keyframesName} ${
             animation.reverse ? 'reverse' : ''
@@ -77,8 +81,8 @@ export class TransitionNameDirective {
         );
       }
 
-      if ('keyframes' in this.outAnimation()!) {
-        const animation = this.outAnimation() as KeyframesTransition;
+      if ('keyframes' in outAnimation) {
+        const animation = outAnimation as KeyframesTransition;
         const keyframesName = this._keyframesService.setKeyframes(
           animation.keyframes
         );
