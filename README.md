@@ -111,9 +111,9 @@ outAnimation = { keyframes: fadeIn, duration: 600, reverse: true };
 <img transitionName="profile-picture" [inAnimation]="inAnimation" [outAnimation]="outAnimation" src="...">
 ```
 
-### Default animations
+### Built-In animations
 
-To start faster there are some default animations available under `DefaultTransitions.*`.
+To start faster there are some built-in animations available under `DefaultTransitions.*`.
 
 ```typescript
 import { DefaultTransitions } from 'ngx-easy-view-transitions';
