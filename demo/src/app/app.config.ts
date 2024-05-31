@@ -1,4 +1,7 @@
-import { ApplicationConfig } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideRouter, withViewTransitions } from '@angular/router';
 import { appRoutes } from './app.routes';
@@ -18,5 +21,6 @@ export const appConfig: ApplicationConfig = {
       { keyframes: DefaultTransitions.none, duration: 0 },
       { keyframes: DefaultTransitions.none, duration: 0 }
     ),
+    provideExperimentalZonelessChangeDetection(),
   ],
 };
