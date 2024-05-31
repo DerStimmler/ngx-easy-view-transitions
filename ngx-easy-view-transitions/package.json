@@ -1,6 +1,6 @@
 {
   "name": "ngx-easy-view-transitions",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Angular library for easier use of the View Transitions API",
   "keywords": ["npm", "library", "angular", "typescript", "animations", "view-transitions", "view-transitions-api", "ngx"],
   "author": "Stimmler",
