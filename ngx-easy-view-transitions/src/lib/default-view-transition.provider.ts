@@ -1,4 +1,4 @@
-import { Provider, inject, provideAppInitializer } from '@angular/core';
+import { inject, provideAppInitializer, EnvironmentProviders } from '@angular/core';
 import { KeyframesTransition } from './keyframes-transition';
 import { CssKeyframesTransition } from './css-keyframes-transition';
 import { ViewTransitionsService } from './view-transitions.service';
@@ -12,31 +12,22 @@ import { KeyframesService } from './keyframes.service';
 export function provideDefaultViewTransition(
   inAnimation: KeyframesTransition | CssKeyframesTransition,
   outAnimation: KeyframesTransition | CssKeyframesTransition
-): Provider {
-  const factory = (
-    viewTransitionService: ViewTransitionsService,
-    keyframesService: KeyframesService
-  ) => {
+): EnvironmentProviders {
+  const factory = (viewTransitionService: ViewTransitionsService, keyframesService: KeyframesService) => {
     return () => {
       if ('keyframesName' in inAnimation) {
         const animation = inAnimation as CssKeyframesTransition;
         viewTransitionService.setInAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           'root'
         );
       }
 
       if ('keyframes' in inAnimation) {
         const animation = inAnimation as KeyframesTransition;
-        const keyframesName = keyframesService.setKeyframes(
-          animation.keyframes
-        );
+        const keyframesName = keyframesService.setKeyframes(animation.keyframes);
         viewTransitionService.setInAnimation(
-          `${animation.duration}ms ${keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           'root'
         );
       }
@@ -44,22 +35,16 @@ export function provideDefaultViewTransition(
       if ('keyframesName' in outAnimation) {
         const animation = outAnimation as CssKeyframesTransition;
         viewTransitionService.setOutAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           'root'
         );
       }
 
       if ('keyframes' in outAnimation) {
         const animation = outAnimation as KeyframesTransition;
-        const keyframesName = keyframesService.setKeyframes(
-          animation.keyframes
-        );
+        const keyframesName = keyframesService.setKeyframes(animation.keyframes);
         viewTransitionService.setOutAnimation(
-          `${animation.duration}ms ${keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           'root'
         );
       }
@@ -67,7 +52,7 @@ export function provideDefaultViewTransition(
   };
 
   return provideAppInitializer(() => {
-        const initializerFn = (factory)(inject(ViewTransitionsService), inject(KeyframesService));
-        return initializerFn();
-      });
+    const initializerFn = factory(inject(ViewTransitionsService), inject(KeyframesService));
+    return initializerFn();
+  });
 }
