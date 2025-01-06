@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, Provider } from '@angular/core';
+import { Provider, inject, provideAppInitializer } from '@angular/core';
 import { KeyframesTransition } from './keyframes-transition';
 import { CssKeyframesTransition } from './css-keyframes-transition';
 import { ViewTransitionsService } from './view-transitions.service';
@@ -66,10 +66,8 @@ export function provideDefaultViewTransition(
     };
   };
 
-  return {
-    provide: APP_INITIALIZER,
-    useFactory: factory,
-    multi: true,
-    deps: [ViewTransitionsService, KeyframesService],
-  };
+  return provideAppInitializer(() => {
+        const initializerFn = (factory)(inject(ViewTransitionsService), inject(KeyframesService));
+        return initializerFn();
+      });
 }

@@ -63,5 +63,6 @@
       "style": "scss"
     }
   },
-  "useInferencePlugins": false
+  "useInferencePlugins": false,
+  "useLegacyCache": true
 }

@@ -7,16 +7,15 @@ import {
 import { NgOptimizedImage } from '@angular/common';
 
 @Component({
-  standalone: true,
-  imports: [
-    RouterModule,
-    NoTransitionDirective,
-    TransitionNameDirective,
-    NgOptimizedImage,
-  ],
-  selector: 'ngx-easy-view-transitions-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    imports: [
+        RouterModule,
+        NoTransitionDirective,
+        TransitionNameDirective,
+        NgOptimizedImage,
+    ],
+    selector: 'ngx-easy-view-transitions-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   protected readonly repoUrl =

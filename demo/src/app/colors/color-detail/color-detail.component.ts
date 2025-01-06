@@ -8,12 +8,11 @@ import {
 import { ColorsService } from '../colors.service';
 
 @Component({
-  selector: 'ngx-easy-view-transitions-color-detail',
-  standalone: true,
-  imports: [CommonModule, TransitionNameDirective],
-  templateUrl: './color-detail.component.html',
-  styleUrls: ['./color-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngx-easy-view-transitions-color-detail',
+    imports: [CommonModule, TransitionNameDirective],
+    templateUrl: './color-detail.component.html',
+    styleUrls: ['./color-detail.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorDetailComponent {
   private readonly _colorsService = inject(ColorsService);

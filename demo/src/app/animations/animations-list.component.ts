@@ -12,12 +12,11 @@ import {
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'ngx-easy-view-transitions-animations-list',
-  standalone: true,
-  imports: [CommonModule, TransitionNameDirective, RouterLink],
-  templateUrl: './animations-list.component.html',
-  styleUrl: './animations-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'ngx-easy-view-transitions-animations-list',
+    imports: [CommonModule, TransitionNameDirective, RouterLink],
+    templateUrl: './animations-list.component.html',
+    styleUrl: './animations-list.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnimationsListComponent {
   private readonly animations = signal<Record<string, Keyframe[]>>(
