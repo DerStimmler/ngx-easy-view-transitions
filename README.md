@@ -2,7 +2,6 @@
 
 [![npm version](https://img.shields.io/npm/v/ngx-easy-view-transitions)](https://www.npmjs.org/package/ngx-easy-view-transitions/)
 [![npm downloads](https://img.shields.io/npm/dt/ngx-easy-view-transitions)](https://www.npmjs.org/package/ngx-easy-view-transitions/)
-![build](https://github.com/DerStimmler/ngx-easy-view-transitions/actions/workflows/build.yml/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/DerStimmler/ngx-easy-view-transitions)](https://github.com/DerStimmler/ngx-easy-view-transitions/blob/main/LICENSE.md)
 
 Angular library for easier use of the View Transitions API
