@@ -1,0 +1,75 @@
+name: 'Publish package'
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 'latest'
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm nx build ngx-easy-view-transitions --configuration=production
+
+      - name: Test
+        run: pnpm nx test ngx-easy-view-transitions
+
+      - name: Lint
+        run: pnpm nx lint ngx-easy-view-transitions
+
+      - name: Extract version from tag
+        run: |
+          # Extract the version from the tag (e.g., 'refs/tags/v1.2.3' -> '1.2.3')
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Set version
+        run: |
+          npm version ${{ env.VERSION }} --no-git-tag-version
+        working-directory: dist/ngx-easy-view-transitions
+
+      - name: Pack package
+        run: |
+          npm pack --pack-destination '..'
+        working-directory: dist/ngx-easy-view-transitions
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: dist/ngx-easy-view-transitions-${{ env.VERSION }}.tgz
+
+      - name: Attach package to GitHub release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/ngx-easy-view-transitions-${{ env.VERSION }}.tgz
+          tag: ${{ github.ref }}
+          overwrite: true
+
+      - name: Publish package to npm
+        run: |
+          npm publish
+        working-directory: dist/ngx-easy-view-transitions
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
