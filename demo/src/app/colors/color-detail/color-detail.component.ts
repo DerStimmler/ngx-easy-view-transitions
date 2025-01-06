@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -9,7 +9,7 @@ import { ColorsService } from '../colors.service';
 
 @Component({
     selector: 'ngx-easy-view-transitions-color-detail',
-    imports: [CommonModule, TransitionNameDirective],
+    imports: [TransitionNameDirective],
     templateUrl: './color-detail.component.html',
     styleUrls: ['./color-detail.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

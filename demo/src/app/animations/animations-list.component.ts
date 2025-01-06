@@ -4,7 +4,7 @@ import {
   computed,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {
   DefaultTransitions,
   TransitionNameDirective,
@@ -13,7 +13,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'ngx-easy-view-transitions-animations-list',
-    imports: [CommonModule, TransitionNameDirective, RouterLink],
+    imports: [TransitionNameDirective, RouterLink],
     templateUrl: './animations-list.component.html',
     styleUrl: './animations-list.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
