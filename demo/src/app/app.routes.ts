@@ -1,20 +1,17 @@
 import { Route } from '@angular/router';
-import { ColorDetailComponent } from './colors/color-detail/color-detail.component';
-import { ColorsListComponent } from './colors/colors-list.component';
-import { AnimationsListComponent } from './animations/animations-list.component';
 
 export const appRoutes: Route[] = [
   {
     path: 'animations',
-    component: AnimationsListComponent,
+    loadComponent: () => import('./animations/animations-list.component').then((m) => m.AnimationsListComponent),
   },
   {
     path: 'colors',
-    component: ColorsListComponent,
+    loadComponent: () => import('./colors/colors-list.component').then((m) => m.ColorsListComponent),
   },
   {
     path: 'colors/:color',
-    component: ColorDetailComponent,
+    loadComponent: () => import('./colors/color-detail/color-detail.component').then((m) => m.ColorDetailComponent),
   },
   {
     path: '**',
