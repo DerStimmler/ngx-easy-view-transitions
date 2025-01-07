@@ -28,13 +28,13 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build --configuration=production
+        run: pnpm nx build demo --configuration=production
 
       - name: Test
-        run: pnpm test
+        run: pnpm nx test demo
 
       - name: Lint
-        run: pnpm lint
+        run: pnpm nx lint demo
 
       - name: SPA 404 workaround
         run: cp dist/demo/browser/index.html dist/demo/browser/404.html
