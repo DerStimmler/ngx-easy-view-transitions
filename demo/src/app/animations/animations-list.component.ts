@@ -1,31 +1,20 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 
-import {
-  DefaultTransitions,
-  TransitionNameDirective,
-} from 'ngx-easy-view-transitions';
-import { RouterLink } from '@angular/router';
+import { DefaultTransitions } from 'ngx-easy-view-transitions';
 
 @Component({
-    selector: 'ngx-easy-view-transitions-animations-list',
-    imports: [TransitionNameDirective, RouterLink],
-    templateUrl: './animations-list.component.html',
-    styleUrl: './animations-list.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'ngx-easy-view-transitions-animations-list',
+  imports: [],
+  templateUrl: './animations-list.component.html',
+  styleUrl: './animations-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimationsListComponent {
   private readonly animations = signal<Record<string, Keyframe[]>>(
     DefaultTransitions as unknown as Record<string, Keyframe[]>
   );
 
-  protected readonly animationNames = computed(() =>
-    Object.keys(this.animations())
-  );
+  protected readonly animationNames = computed(() => Object.keys(this.animations()));
   protected readonly duration = signal(600);
 
   protected playAnimation(animationName: string) {
