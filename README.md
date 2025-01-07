@@ -18,6 +18,12 @@ Available on [npm](https://www.npmjs.org/package/ngx-easy-view-transitions/).
 npm install ngx-easy-view-transitions
 ```
 
+| Package version | Angular version |
+|-----------------|-----------------|
+| `3.x.x`         | `>=19.0.0`      |
+| `2.x.x`         | `>=18.0.0`      |
+| `1.x.x`         | `^17.3.0`       |
+
 You have to enable Angulars built-in view transitions in the Router using the [`withViewTransitions()`](https://angular.io/api/router/withViewTransitions#usage-notes) function.
 
 ```typescript
