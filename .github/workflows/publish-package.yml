@@ -49,6 +49,11 @@ jobs:
           npm version ${{ env.VERSION }} --no-git-tag-version
         working-directory: dist/ngx-easy-view-transitions
 
+      - name: Copy repo files
+        run: |
+          cp README.md dist/ngx-easy-view-transitions/README.md
+          cp LICENSE.md dist/ngx-easy-view-transitions/LICENSE.md
+
       - name: Pack package
         run: |
           npm pack --pack-destination '..'
