@@ -44,22 +44,16 @@ export class TransitionNameDirective {
       if ('keyframesName' in inAnimation) {
         const animation = inAnimation as CssKeyframesTransition;
         this._viewTransitionsService.setInAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           this.transitionName()
         );
       }
 
       if ('keyframes' in inAnimation) {
         const animation = inAnimation as KeyframesTransition;
-        const keyframesName = this._keyframesService.setKeyframes(
-          animation.keyframes
-        );
+        const keyframesName = this._keyframesService.setKeyframes(animation.keyframes);
         this._viewTransitionsService.setInAnimation(
-          `${animation.duration}ms ${keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           this.transitionName()
         );
       }
@@ -74,22 +68,16 @@ export class TransitionNameDirective {
       if ('keyframesName' in outAnimation) {
         const animation = outAnimation as CssKeyframesTransition;
         this._viewTransitionsService.setOutAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           this.transitionName()
         );
       }
 
       if ('keyframes' in outAnimation) {
         const animation = outAnimation as KeyframesTransition;
-        const keyframesName = this._keyframesService.setKeyframes(
-          animation.keyframes
-        );
+        const keyframesName = this._keyframesService.setKeyframes(animation.keyframes);
         this._viewTransitionsService.setOutAnimation(
-          `${animation.duration}ms ${keyframesName} ${
-            animation.reverse ? 'reverse' : ''
-          }`,
+          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
           this.transitionName()
         );
       }

@@ -1,4 +1,4 @@
-import { inject, provideAppInitializer, EnvironmentProviders } from '@angular/core';
+import { EnvironmentProviders, inject, provideAppInitializer } from '@angular/core';
 import { KeyframesTransition } from './keyframes-transition';
 import { CssKeyframesTransition } from './css-keyframes-transition';
 import { ViewTransitionsService } from './view-transitions.service';

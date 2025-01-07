@@ -10,12 +10,11 @@ import { DefaultTransitions } from 'ngx-easy-view-transitions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnimationsListComponent {
+  protected readonly duration = signal(600);
   private readonly animations = signal<Record<string, Keyframe[]>>(
     DefaultTransitions as unknown as Record<string, Keyframe[]>
   );
-
   protected readonly animationNames = computed(() => Object.keys(this.animations()));
-  protected readonly duration = signal(600);
 
   protected playAnimation(animationName: string) {
     const animation = this.animations()[animationName];

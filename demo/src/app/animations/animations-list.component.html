@@ -1,6 +1,4 @@
-<div
-  class="grid gap-8 grid-rows-[max-content_max-content_max-content_1fr] h-full items-center"
->
+<div class="grid gap-8 grid-rows-[max-content_max-content_max-content_1fr] h-full items-center">
   <p>
     Here you can test all built-in animations. They are available via
     <span class="font-mono">DefaultTransitions.*</span>
@@ -19,25 +17,18 @@
       duration in ms
     </label>
   </div>
-  <div
-    class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-4 md:gap-8 w-full"
-  >
+  <div class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-4 md:gap-8 w-full">
     @for (animationName of animationNames(); track animationName) {
-    <div
-      (click)="playAnimation(animationName)"
-      class="h-12 w-full font-bold rounded-xl cursor-pointer bg-gray-500 p-4 text-white flex justify-center items-center"
-    >
-      {{ animationName }}
-    </div>
+      <div
+        (click)="playAnimation(animationName)"
+        class="h-12 w-full font-bold rounded-xl cursor-pointer bg-gray-500 p-4 text-white flex justify-center items-center"
+      >
+        {{ animationName }}
+      </div>
     }
   </div>
 
   <div class="grid place-items-center">
-    <div
-      class="h-32 w-32 font-bold rounded-xl bg-amber-500 p-4 flex justify-center items-center"
-      id="demo"
-    >
-      DEMO
-    </div>
+    <div class="h-32 w-32 font-bold rounded-xl bg-amber-500 p-4 flex justify-center items-center" id="demo">DEMO</div>
   </div>
 </div>

@@ -1,10 +1,4 @@
-import {
-  Directive,
-  ElementRef,
-  inject,
-  OnInit,
-  RendererFactory2,
-} from '@angular/core';
+import { Directive, ElementRef, inject, OnInit, RendererFactory2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
 /**
@@ -27,9 +21,7 @@ export class NoTransitionDirective implements OnInit {
 
     const elementId = 'view-transition-none';
 
-    const styleElement =
-      this._document.getElementById(elementId) ||
-      this._document.createElement('style');
+    const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
 
     styleElement.innerHTML = `
     ::view-transition-group(${transitionName}),
@@ -40,7 +32,6 @@ export class NoTransitionDirective implements OnInit {
     `;
     styleElement.id = elementId;
 
-    if (!this._document.getElementById(elementId))
-      this._renderer.appendChild(this._document.head, styleElement);
+    if (!this._document.getElementById(elementId)) this._renderer.appendChild(this._document.head, styleElement);
   }
 }

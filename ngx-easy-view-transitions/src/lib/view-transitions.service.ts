@@ -11,9 +11,7 @@ export class ViewTransitionsService {
   setOutAnimation(outAnimation: string, transitionName: string) {
     const elementId = `view-transition-out-${transitionName}`;
 
-    const styleElement =
-      this._document.getElementById(elementId) ||
-      this._document.createElement('style');
+    const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
 
     styleElement.innerHTML = `
     ::view-transition-old(${transitionName}){
@@ -22,16 +20,13 @@ export class ViewTransitionsService {
     `;
     styleElement.id = elementId;
 
-    if (!this._document.getElementById(elementId))
-      this._renderer.appendChild(this._document.head, styleElement);
+    if (!this._document.getElementById(elementId)) this._renderer.appendChild(this._document.head, styleElement);
   }
 
   setInAnimation(inAnimation: string, transitionName: string) {
     const elementId = `view-transition-in-${transitionName}`;
 
-    const styleElement =
-      this._document.getElementById(elementId) ||
-      this._document.createElement('style');
+    const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
 
     styleElement.innerHTML = `
     ::view-transition-new(${transitionName}){
@@ -40,7 +35,6 @@ export class ViewTransitionsService {
     `;
     styleElement.id = elementId;
 
-    if (!this._document.getElementById(elementId))
-      this._renderer.appendChild(this._document.head, styleElement);
+    if (!this._document.getElementById(elementId)) this._renderer.appendChild(this._document.head, styleElement);
   }
 }
