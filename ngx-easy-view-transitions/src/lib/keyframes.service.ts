@@ -12,9 +12,9 @@ export class KeyframesService {
   setKeyframes(keyframes: Keyframe[]) {
     const keyframesAsString = JSON.stringify(keyframes);
     const hashedKeyframes = hashCode(keyframesAsString);
-    const keyframesName = `_${hashedKeyframes}`;
+    const keyframesName = `keyframes-${hashedKeyframes}`;
 
-    const elementId = `keyframes-${keyframesName}`;
+    const elementId = keyframesName;
 
     const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
 
