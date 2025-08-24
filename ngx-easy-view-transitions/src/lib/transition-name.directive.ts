@@ -1,8 +1,9 @@
-import { Directive, effect, ElementRef, inject, input } from '@angular/core';
+import { Directive, effect, ElementRef, inject, input, Renderer2 } from '@angular/core';
 import { KeyframesTransition } from './keyframes-transition';
 import { CssKeyframesTransition } from './css-keyframes-transition';
 import { KeyframesService } from './keyframes.service';
 import { ViewTransitionsService } from './view-transitions.service';
+import { isValidViewTransitionName } from './utils';
 
 /**
  * Configure view transitions for the element
@@ -26,13 +27,23 @@ export class TransitionNameDirective {
   outAnimation = input<KeyframesTransition | CssKeyframesTransition>();
 
   private readonly _el = inject(ElementRef);
+  private readonly _renderer = inject(Renderer2);
   private readonly _keyframesService = inject(KeyframesService);
   private readonly _viewTransitionsService = inject(ViewTransitionsService);
 
   constructor() {
     //transitionName
     effect(() => {
-      this._el.nativeElement.style.viewTransitionName = this.transitionName();
+      const transitionName = this.transitionName();
+
+      this._renderer.setStyle(this._el.nativeElement, 'view-transition-name', transitionName);
+
+      queueMicrotask(() => {
+        if (!isValidViewTransitionName(transitionName))
+          console.warn(
+            `The transition name "${transitionName}" is potentially invalid. Please use a valid CSS <custom-ident> value and avoid forbidden values like "unset", "initial", "inherit" and "none".`
+          );
+      });
     });
 
     //inAnimation
