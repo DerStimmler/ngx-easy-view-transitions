@@ -9,19 +9,25 @@ export class KeyframesService {
   private readonly _renderer = this._rendererFactory.createRenderer(null, null);
   private readonly _document = inject(DOCUMENT);
 
+  private readonly _insertedKeyframes = new Set<string>();
+
   setKeyframes(keyframes: Keyframe[]) {
     const keyframesAsString = JSON.stringify(keyframes);
     const hashedKeyframes = hashCode(keyframesAsString);
     const keyframesName = `keyframes-${hashedKeyframes}`;
 
-    const elementId = keyframesName;
+    if (this._insertedKeyframes.has(keyframesName)) return keyframesName;
 
-    const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
+    const styleElement = this._renderer.createElement('style') as HTMLStyleElement;
 
-    styleElement.innerHTML = this.generateCssKeyframeRule(keyframesName, keyframes);
-    styleElement.id = elementId;
+    this._renderer.setAttribute(styleElement, 'id', keyframesName);
 
-    if (!this._document.getElementById(elementId)) this._renderer.appendChild(this._document.head, styleElement);
+    const cssKeyframeRule = this.generateCssKeyframeRule(keyframesName, keyframes);
+    this._renderer.setProperty(styleElement, 'innerHTML', cssKeyframeRule);
+
+    this._renderer.appendChild(this._document.head, styleElement);
+
+    this._insertedKeyframes.add(keyframesName);
 
     return keyframesName;
   }
