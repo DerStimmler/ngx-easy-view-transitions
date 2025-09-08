@@ -18,11 +18,7 @@ Available on [npm](https://www.npmjs.org/package/ngx-easy-view-transitions/).
 npm install ngx-easy-view-transitions
 ```
 
-| Package version | Angular version |
-|-----------------|-----------------|
-| `3.x.x`         | `>=19.0.0`      |
-| `2.x.x`         | `>=18.0.0`      |
-| `1.x.x`         | `^17.3.0`       |
+Required Angular version: `>=19.0.0`
 
 You have to enable Angulars built-in view transitions in the Router using the [`withViewTransitions()`](https://angular.io/api/router/withViewTransitions#usage-notes) function.
 
@@ -130,7 +126,7 @@ You can see them in the [demo](https://derstimmler.github.io/ngx-easy-view-trans
 
 ### Exclude element from view transitions
 
-When you want to exclude an element form view transitions you can add the `noTransition` directive.
+When you want to exclude an element from view transitions, you can add the `noTransition` directive.
 
 ```typescript
 import { NoTransitionDirective } from 'ngx-easy-view-transitions';
@@ -142,10 +138,10 @@ import { NoTransitionDirective } from 'ngx-easy-view-transitions';
 
 ### Configure default transition
 
-By default View Transitions API will perform a cross-fade animation on all elements.
+By default, View Transitions API will perform a cross-fade animation on all elements.
 But you can also provide your own in and out animations by adding the `provideDefaultViewTransition()` provider function.
 
-In the following example the default animation gets disabled:
+In the following example, the default animation gets disabled:
 
 ```typescript
 bootstrapApplication(AppComponent,
@@ -174,4 +170,4 @@ Run `pnpm lint` to lint all projects.
 
 Run `pnpm build` to build all projects. You can find the output under `/dist`.
 
-Since it's a nx workspace you can use the common nx commands for everything else.
+Since it's a nx workspace, you can use the common nx commands for everything else.
