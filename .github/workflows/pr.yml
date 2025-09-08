@@ -33,3 +33,8 @@ jobs:
 
       - name: Lint
         run: pnpm lint
+
+  lib-compatibility-check:
+    name: Library compatibility check
+    needs: build
+    uses: ./.github/workflows/lib-compatibility-check.yml
