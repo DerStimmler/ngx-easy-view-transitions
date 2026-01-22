@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        angular-version: [ 19,20 ]
+        angular-version: [ 19,20,21 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
