@@ -2,7 +2,7 @@ import { Directive, effect, ElementRef, inject, input, Renderer2 } from '@angula
 import { KeyframesTransition } from './keyframes-transition';
 import { CssKeyframesTransition } from './css-keyframes-transition';
 import { KeyframesService } from './keyframes.service';
-import { ViewTransitionsService } from './view-transitions.service';
+import { ViewTransitionDirection, ViewTransitionsService } from './view-transitions.service';
 import { isValidViewTransitionName } from './utils';
 
 /**
@@ -48,50 +48,47 @@ export class TransitionNameDirective {
 
     //inAnimation
     effect(async () => {
-      const inAnimation = this.inAnimation();
+      const animation = this.inAnimation();
 
-      if (!inAnimation) return;
+      if (!animation) return;
 
-      if ('keyframesName' in inAnimation) {
-        const animation = inAnimation as CssKeyframesTransition;
-        this._viewTransitionsService.setInAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          this.transitionName()
-        );
-      }
-
-      if ('keyframes' in inAnimation) {
-        const animation = inAnimation as KeyframesTransition;
-        const keyframesName = this._keyframesService.setKeyframes(animation.keyframes);
-        this._viewTransitionsService.setInAnimation(
-          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          this.transitionName()
-        );
-      }
+      this.setTransition(this.transitionName(), animation, 'in');
     });
 
     //outAnimation
     effect(async () => {
-      const outAnimation = this.outAnimation();
+      const animation = this.outAnimation();
 
-      if (!outAnimation) return;
+      if (!animation) return;
 
-      if ('keyframesName' in outAnimation) {
-        const animation = outAnimation as CssKeyframesTransition;
-        this._viewTransitionsService.setOutAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          this.transitionName()
-        );
-      }
-
-      if ('keyframes' in outAnimation) {
-        const animation = outAnimation as KeyframesTransition;
-        const keyframesName = this._keyframesService.setKeyframes(animation.keyframes);
-        this._viewTransitionsService.setOutAnimation(
-          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          this.transitionName()
-        );
-      }
+      this.setTransition(this.transitionName(), animation, 'out');
     });
+  }
+
+  private setTransition(
+    transitionName: string,
+    transition: KeyframesTransition | CssKeyframesTransition,
+    direction: ViewTransitionDirection
+  ) {
+    let animationName: string | null = null;
+
+    if ('keyframesName' in transition) {
+      animationName = (transition as CssKeyframesTransition).keyframesName;
+    }
+
+    if ('keyframes' in transition) {
+      animationName = this._keyframesService.setKeyframes((transition as KeyframesTransition).keyframes);
+    }
+
+    if (!animationName) return;
+
+    this._viewTransitionsService.setTransition(
+      transitionName,
+      {
+        name: animationName,
+        ...transition,
+      },
+      direction
+    );
   }
 }

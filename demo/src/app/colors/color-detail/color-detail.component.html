@@ -2,33 +2,37 @@
   <div class="flex gap-8 justify-center" style="grid-template-rows: 1fr max-content">
     <div class="grid place-items-center">
       <div
-        class="h-32 md:h-64 aspect-square rounded-2xl"
         [style.backgroundColor]="color.hex"
         [transitionName]="color.name + '-img'"
+        class="h-32 md:h-64 aspect-square rounded-2xl"
       ></div>
-      <span class="font-bold text-xl md:text-3xl" [transitionName]="color.name">{{ color.name }}</span>
+      <span [transitionName]="color.name" class="font-bold text-xl md:text-3xl">{{ color.name }}</span>
     </div>
     <div class="flex flex-col gap-4 justify-center">
       <p
-        [transitionName]="'description'"
         [inAnimation]="{ keyframesName: 'fadeInRight', duration: 300 }"
-        [outAnimation]="{ keyframesName: 'fadeOutRight', duration: 300 }"
+        [outAnimation]="{ keyframesName: 'fadeOutRight', duration: 300, fillMode: 'forwards' }"
+        [transitionName]="'description'"
+        class="max-w-[60ch]"
       >
         {{ color.description }}
       </p>
       <div
         class="flex flex-col gap-1 font-thin text-sm font-mono"
-        [transitionName]="'properties'"
-        [inAnimation]="{ keyframes: fadeInUp, duration: 300 }"
-        [outAnimation]="{ keyframes: fadeOutDown, duration: 300 }"
       >
-        <div>
+        <div [inAnimation]="{ keyframes: fadeInUp, duration: 300 }"
+             [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+             [transitionName]="'properties-hex'">
           HEX: <span class="font-bold">{{ color.hex }}</span>
         </div>
-        <div>
+        <div [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 50 }"
+             [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+             [transitionName]="'properties-rgb'">
           RGB: <span class="font-bold">{{ color.rgb }}</span>
         </div>
-        <div>
+        <div [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 100 }"
+             [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+             [transitionName]="'properties-hls'">
           HLS: <span class="font-bold">{{ color.hls }}</span>
         </div>
       </div>

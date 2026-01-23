@@ -1,5 +1,6 @@
-import { inject, Injectable, RendererFactory2 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import {inject, Injectable, RendererFactory2} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {TransitionBase} from './transition-base';
 
 /**@internal*/
 @Injectable({ providedIn: 'root' })
@@ -8,33 +9,33 @@ export class ViewTransitionsService {
   private readonly _renderer = this._rendererFactory.createRenderer(null, null);
   private readonly _document = inject(DOCUMENT);
 
-  setOutAnimation(outAnimation: string, transitionName: string) {
-    const elementId = `view-transition-out-${transitionName}`;
+  setTransition(transitionName: string, animation: TransitionAnimation, direction: ViewTransitionDirection): void {
+    const elementId = `view-transition-${direction}-${transitionName}`;
+
+    if (this._document.getElementById(elementId)) return;
 
     const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
 
     styleElement.innerHTML = `
-    ::view-transition-old(${transitionName}){
-      animation: ${outAnimation};
+    ::view-transition-${direction === 'in' ? 'new' : 'old'}(${transitionName}){
+      animation-name: ${animation.name};
+      animation-duration: ${animation.duration}ms;
+      animation-delay: ${animation.delay ?? 0}ms;
+      animation-direction: ${animation.reverse ? 'reverse' : 'normal'};
+      animation-fill-mode: ${animation.fillMode ?? 'none'};
+      animation-timing-function: ${animation.timingFunction ?? 'ease'};
     }
     `;
     styleElement.id = elementId;
 
-    if (!this._document.getElementById(elementId)) this._renderer.appendChild(this._document.head, styleElement);
-  }
-
-  setInAnimation(inAnimation: string, transitionName: string) {
-    const elementId = `view-transition-in-${transitionName}`;
-
-    const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
-
-    styleElement.innerHTML = `
-    ::view-transition-new(${transitionName}){
-      animation: ${inAnimation};
-    }
-    `;
-    styleElement.id = elementId;
-
-    if (!this._document.getElementById(elementId)) this._renderer.appendChild(this._document.head, styleElement);
+    this._renderer.appendChild(this._document.head, styleElement);
   }
 }
+
+/**@internal*/
+export type TransitionAnimation = TransitionBase & {
+  name: string;
+};
+
+/**@internal*/
+export type ViewTransitionDirection = 'in' | 'out';

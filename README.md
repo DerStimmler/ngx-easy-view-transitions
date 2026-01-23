@@ -39,7 +39,7 @@ bootstrapApplication(AppComponent,
 To morph an element during navigation from the old to the new state use the `transitionName` directive and provide the same name on both pages.
 
 ```typescript
-import { TransitionNameDirective } from 'ngx-easy-view-transitions';
+import {TransitionNameDirective} from 'ngx-easy-view-transitions';
 ```
 
 `users.component.html`
@@ -78,8 +78,8 @@ You can simply use a CSS [`@keyframes`](https://developer.mozilla.org/en-US/docs
 ```
 
 ```typescript
-inAnimation = { keyframeName: 'fadeIn', duration: 600 };
-outAnimation = { keyframeName: 'fadeIn', duration: 600, reverse: true };
+inAnimation = {keyframeName: 'fadeIn', duration: 600};
+outAnimation = {keyframeName: 'fadeIn', duration: 600, reverse: true};
 ```
 
 ```angular2html
@@ -104,12 +104,29 @@ const fadeIn: Keyframe[] = [
 ```
 
 ```typescript
-inAnimation = { keyframes: fadeIn, duration: 600 };
-outAnimation = { keyframes: fadeIn, duration: 600, reverse: true };
+inAnimation = {keyframes: fadeIn, duration: 600};
+outAnimation = {keyframes: fadeIn, duration: 600, reverse: true};
 ```
 
 ```angular2html
 <img transitionName="profile-picture" [inAnimation]="inAnimation" [outAnimation]="outAnimation" src="...">
+```
+
+#### Further customization
+
+You can further customize the animation by passing standard
+[CSS animation properties](https://developer.mozilla.org/de/docs/Web/CSS/Reference/Properties/animation),
+such as `fill-mode`, `delay`, or `timing-function`.
+
+```ts
+animation = {
+  keyframeName: 'fadeIn',
+  duration: 600,
+  reverse: true,
+  fillMode: 'forwards',
+  timingFunction: 'ease-in',
+  delay: 100
+};
 ```
 
 ### Built-In animations
@@ -117,9 +134,9 @@ outAnimation = { keyframes: fadeIn, duration: 600, reverse: true };
 To start faster there are some built-in animations available under `DefaultTransitions.*`.
 
 ```typescript
-import { DefaultTransitions } from 'ngx-easy-view-transitions';
+import {DefaultTransitions} from 'ngx-easy-view-transitions';
 
-inAnimation = { keyframes: DefaultTransitions.fadeInUp, duration: 600 };
+inAnimation = {keyframes: DefaultTransitions.fadeInUp, duration: 600};
 ```
 
 You can see them in the [demo](https://derstimmler.github.io/ngx-easy-view-transitions/animations) and [here](https://github.com/DerStimmler/ngx-easy-view-transitions/blob/main/ngx-easy-view-transitions/src/lib/default-transitions.ts).
@@ -129,7 +146,7 @@ You can see them in the [demo](https://derstimmler.github.io/ngx-easy-view-trans
 When you want to exclude an element from view transitions, you can add the `noTransition` directive.
 
 ```typescript
-import { NoTransitionDirective } from 'ngx-easy-view-transitions';
+import {NoTransitionDirective} from 'ngx-easy-view-transitions';
 ```
 
 ```angular2html
@@ -149,13 +166,17 @@ bootstrapApplication(AppComponent,
     providers: [
       provideRouter(appRoutes, withViewTransitions()),
       provideDefaultViewTransition(
-        { keyframes: DefaultTransitions.none, duration: 0 },
-        { keyframes: DefaultTransitions.none, duration: 0 }
+        {keyframes: DefaultTransitions.none, duration: 0},
+        {keyframes: DefaultTransitions.none, duration: 0}
       )
     ]
   }
 );
 ```
+
+### Troubleshooting
+
+If your elements flicker when navigating, try to set the `fillMode` to `forwards`.
 
 ## Development
 
