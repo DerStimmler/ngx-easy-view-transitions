@@ -1,17 +1,11 @@
+import { TransitionBase } from './transition-base';
+
 /**
  * Provide custom animation via CSS [`@keyframes`](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) rule
  */
-export interface CssKeyframesTransition {
+export interface CssKeyframesTransition extends TransitionBase {
   /**
    * Name of the CSS [`@keyframes`](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) rule
    */
   keyframesName: string;
-  /**
-   * Duration of the transition in ms
-   */
-  duration: number;
-  /**
-   * Wether the animation should be played reversed
-   */
-  reverse?: boolean;
 }

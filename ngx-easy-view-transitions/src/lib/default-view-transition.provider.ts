@@ -1,7 +1,7 @@
 import { EnvironmentProviders, inject, provideAppInitializer } from '@angular/core';
 import { KeyframesTransition } from './keyframes-transition';
 import { CssKeyframesTransition } from './css-keyframes-transition';
-import { ViewTransitionsService } from './view-transitions.service';
+import { ViewTransitionDirection, ViewTransitionsService } from './view-transitions.service';
 import { KeyframesService } from './keyframes.service';
 
 /**
@@ -13,40 +13,41 @@ export function provideDefaultViewTransition(
   inAnimation: KeyframesTransition | CssKeyframesTransition,
   outAnimation: KeyframesTransition | CssKeyframesTransition
 ): EnvironmentProviders {
-  const factory = (viewTransitionService: ViewTransitionsService, keyframesService: KeyframesService) => {
+  const factory = (viewTransitionsService: ViewTransitionsService, keyframesService: KeyframesService) => {
+    const setTransition = (
+      transitionName: string,
+      transition: KeyframesTransition | CssKeyframesTransition,
+      direction: ViewTransitionDirection
+    ) => {
+      let animationName: string | null = null;
+
+      if ('keyframesName' in transition) {
+        animationName = (transition as CssKeyframesTransition).keyframesName;
+      }
+
+      if ('keyframes' in transition) {
+        animationName = keyframesService.setKeyframes((transition as KeyframesTransition).keyframes);
+      }
+
+      if (!animationName) return;
+
+      viewTransitionsService.setTransition(
+        transitionName,
+        {
+          name: animationName,
+          ...transition,
+        },
+        direction
+      );
+    };
+
     return () => {
-      if ('keyframesName' in inAnimation) {
-        const animation = inAnimation as CssKeyframesTransition;
-        viewTransitionService.setInAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          'root'
-        );
+      if (inAnimation) {
+        setTransition('root', inAnimation, 'in');
       }
 
-      if ('keyframes' in inAnimation) {
-        const animation = inAnimation as KeyframesTransition;
-        const keyframesName = keyframesService.setKeyframes(animation.keyframes);
-        viewTransitionService.setInAnimation(
-          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          'root'
-        );
-      }
-
-      if ('keyframesName' in outAnimation) {
-        const animation = outAnimation as CssKeyframesTransition;
-        viewTransitionService.setOutAnimation(
-          `${animation.duration}ms ${animation.keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          'root'
-        );
-      }
-
-      if ('keyframes' in outAnimation) {
-        const animation = outAnimation as KeyframesTransition;
-        const keyframesName = keyframesService.setKeyframes(animation.keyframes);
-        viewTransitionService.setOutAnimation(
-          `${animation.duration}ms ${keyframesName} ${animation.reverse ? 'reverse' : ''}`,
-          'root'
-        );
+      if (outAnimation) {
+        setTransition('root', outAnimation, 'out');
       }
     };
   };
