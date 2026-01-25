@@ -163,11 +163,21 @@ But you can also provide your own in and out animations by adding the `provideDe
 
 In the following example, the default animation gets disabled:
 
+<!-- prettier-ignore-start -->
 ```typescript
-bootstrapApplication(AppComponent, {
-  providers: [provideRouter(appRoutes, withViewTransitions()), provideDefaultViewTransition({ keyframes: DefaultTransitions.none, duration: 0 }, { keyframes: DefaultTransitions.none, duration: 0 })]
-});
+bootstrapApplication(AppComponent,
+  {
+    providers: [
+      provideRouter(appRoutes, withViewTransitions()),
+      provideDefaultViewTransition(
+        {keyframes: DefaultTransitions.none, duration: 0},
+        {keyframes: DefaultTransitions.none, duration: 0}
+      )
+    ]
+  }
+);
 ```
+<!-- prettier-ignore-end -->
 
 ### Troubleshooting
 
