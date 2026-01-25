@@ -1,12 +1,11 @@
 /**@internal*/
-export function hashCode(str: string): number {
-  let hash = 0;
-  for (let i = 0, len = str.length; i < len; i++) {
-    const code = str.charCodeAt(i);
-    hash = (hash << 5) - hash + code;
-    hash |= 0; // Convert to 32bit integer
+export function fnv1aHash(str: string) {
+  let hash = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
   }
-  return hash;
+  return hash >>> 0;
 }
 
 /**@internal*/

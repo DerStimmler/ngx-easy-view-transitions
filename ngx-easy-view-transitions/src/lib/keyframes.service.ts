@@ -1,5 +1,5 @@
 import { inject, Injectable, RendererFactory2 } from '@angular/core';
-import { hashCode } from './utils';
+import { fnv1aHash } from './utils';
 import { DOCUMENT } from '@angular/common';
 
 /**@internal*/
@@ -13,7 +13,7 @@ export class KeyframesService {
 
   setKeyframes(keyframes: Keyframe[]) {
     const keyframesAsString = JSON.stringify(keyframes);
-    const hashedKeyframes = hashCode(keyframesAsString);
+    const hashedKeyframes = fnv1aHash(keyframesAsString);
     const keyframesName = `keyframes-${hashedKeyframes}`;
 
     if (this._insertedKeyframes.has(keyframesName)) return keyframesName;
