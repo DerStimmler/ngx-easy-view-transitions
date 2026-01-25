@@ -7,7 +7,7 @@ import { DefaultTransitions, TransitionNameDirective } from 'ngx-easy-view-trans
   imports: [TransitionNameDirective],
   templateUrl: './animations-list.component.html',
   styleUrl: './animations-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnimationsListComponent {
   protected readonly duration = signal(600);

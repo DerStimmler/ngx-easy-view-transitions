@@ -21,7 +21,7 @@
     @for (animationName of animationNames(); track animationName; let i = $index; let count = $count) {
       <div
         (click)="playAnimation(animationName)"
-        [inAnimation]="{keyframes : scaleIn, delay: i * 10,duration: count * 10}"
+        [inAnimation]="{ keyframes: scaleIn, delay: i * 10, duration: count * 10 }"
         [transitionName]="'animation' + i"
         class="h-12 w-full font-bold rounded-xl cursor-pointer bg-gray-500 p-4 text-white flex justify-center items-center"
       >

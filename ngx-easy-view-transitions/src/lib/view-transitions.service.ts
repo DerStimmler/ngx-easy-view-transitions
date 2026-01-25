@@ -1,6 +1,6 @@
-import {inject, Injectable, RendererFactory2} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {TransitionBase} from './transition-base';
+import { inject, Injectable, RendererFactory2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { TransitionBase } from './transition-base';
 
 /**@internal*/
 @Injectable({ providedIn: 'root' })

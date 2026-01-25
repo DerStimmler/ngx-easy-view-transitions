@@ -10,7 +10,7 @@ import { isValidViewTransitionName } from './utils';
  */
 @Directive({
   standalone: true,
-  selector: '[transitionName]',
+  selector: '[transitionName]'
 })
 export class TransitionNameDirective {
   /**
@@ -86,7 +86,7 @@ export class TransitionNameDirective {
       transitionName,
       {
         name: animationName,
-        ...transition,
+        ...transition
       },
       direction
     );

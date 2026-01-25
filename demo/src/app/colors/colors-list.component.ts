@@ -8,7 +8,7 @@ import { ColorsService } from './colors.service';
   imports: [RouterLink, TransitionNameDirective],
   templateUrl: './colors-list.component.html',
   styleUrls: ['./colors-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorsListComponent {
   private readonly _colorsService = inject(ColorsService);

@@ -6,7 +6,7 @@ import { DOCUMENT } from '@angular/common';
  */
 @Directive({
   standalone: true,
-  selector: '[noTransition]',
+  selector: '[noTransition]'
 })
 export class NoTransitionDirective implements OnInit {
   private readonly _el = inject(ElementRef);
