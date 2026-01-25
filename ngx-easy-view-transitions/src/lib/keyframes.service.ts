@@ -1,33 +1,23 @@
-import { inject, Injectable, RendererFactory2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { fnv1aHash } from './utils';
-import { DOCUMENT } from '@angular/common';
+import { CssRuleManagerService } from './css-rule-manager.service';
 
 /**@internal*/
 @Injectable({ providedIn: 'root' })
 export class KeyframesService {
-  private readonly _rendererFactory = inject(RendererFactory2);
-  private readonly _renderer = this._rendererFactory.createRenderer(null, null);
-  private readonly _document = inject(DOCUMENT);
-
-  private readonly _insertedKeyframes = new Set<string>();
+  private readonly _cssRuleManager = new CssRuleManagerService(
+    'ngx-easy-view-transitions-keyframes',
+    `<!-- contains custom keyframes of ngx-easy-view-transitions as CSS rules in stylesheet -->`
+  );
 
   setKeyframes(keyframes: Keyframe[]) {
     const keyframesAsString = JSON.stringify(keyframes);
     const hashedKeyframes = fnv1aHash(keyframesAsString);
     const keyframesName = `keyframes-${hashedKeyframes}`;
 
-    if (this._insertedKeyframes.has(keyframesName)) return keyframesName;
-
-    const styleElement = this._renderer.createElement('style') as HTMLStyleElement;
-
-    this._renderer.setAttribute(styleElement, 'id', keyframesName);
-
     const cssKeyframeRule = this.generateCssKeyframeRule(keyframesName, keyframes);
-    this._renderer.setProperty(styleElement, 'innerHTML', cssKeyframeRule);
 
-    this._renderer.appendChild(this._document.head, styleElement);
-
-    this._insertedKeyframes.add(keyframesName);
+    this._cssRuleManager.setRule(keyframesName, cssKeyframeRule);
 
     return keyframesName;
   }
