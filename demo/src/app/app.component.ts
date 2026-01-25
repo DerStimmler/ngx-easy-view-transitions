@@ -7,7 +7,7 @@ import { NgOptimizedImage } from '@angular/common';
   imports: [RouterModule, TransitionNameDirective, NgOptimizedImage],
   selector: 'ngx-easy-view-transitions-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   protected readonly repoUrl = 'https://github.com/DerStimmler/ngx-easy-view-transitions';

@@ -8,7 +8,7 @@ import { ColorsService } from '../colors.service';
   imports: [TransitionNameDirective],
   templateUrl: './color-detail.component.html',
   styleUrls: ['./color-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorDetailComponent {
   protected readonly fadeInUp = DefaultTransitions.fadeInUp;

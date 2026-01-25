@@ -23,13 +23,9 @@ Required Angular version: `>=19.0.0`
 You have to enable Angulars built-in view transitions in the Router using the [`withViewTransitions()`](https://angular.io/api/router/withViewTransitions#usage-notes) function.
 
 ```typescript
-bootstrapApplication(AppComponent,
-  {
-    providers: [
-      provideRouter(appRoutes, withViewTransitions())
-    ]
-  }
-);
+bootstrapApplication(AppComponent, {
+  providers: [provideRouter(appRoutes, withViewTransitions())]
+});
 ```
 
 ## Usage
@@ -94,12 +90,12 @@ When you want to use typed objects instead of CSS you can provide a [`Keyframe`]
 const fadeIn: Keyframe[] = [
   {
     opacity: 0,
-    offset: 0,
+    offset: 0
   },
   {
     opacity: 1,
-    offset: 1,
-  },
+    offset: 1
+  }
 ];
 ```
 

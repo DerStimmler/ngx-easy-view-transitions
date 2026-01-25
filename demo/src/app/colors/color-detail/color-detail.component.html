@@ -17,22 +17,26 @@
       >
         {{ color.description }}
       </p>
-      <div
-        class="flex flex-col gap-1 font-thin text-sm font-mono"
-      >
-        <div [inAnimation]="{ keyframes: fadeInUp, duration: 300 }"
-             [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
-             [transitionName]="'properties-hex'">
+      <div class="flex flex-col gap-1 font-thin text-sm font-mono">
+        <div
+          [inAnimation]="{ keyframes: fadeInUp, duration: 300 }"
+          [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+          [transitionName]="'properties-hex'"
+        >
           HEX: <span class="font-bold">{{ color.hex }}</span>
         </div>
-        <div [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 50 }"
-             [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
-             [transitionName]="'properties-rgb'">
+        <div
+          [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 50 }"
+          [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+          [transitionName]="'properties-rgb'"
+        >
           RGB: <span class="font-bold">{{ color.rgb }}</span>
         </div>
-        <div [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 100 }"
-             [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
-             [transitionName]="'properties-hls'">
+        <div
+          [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 100 }"
+          [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+          [transitionName]="'properties-hls'"
+        >
           HLS: <span class="font-bold">{{ color.hls }}</span>
         </div>
       </div>

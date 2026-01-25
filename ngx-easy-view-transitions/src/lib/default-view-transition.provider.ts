@@ -35,7 +35,7 @@ export function provideDefaultViewTransition(
         transitionName,
         {
           name: animationName,
-          ...transition,
+          ...transition
         },
         direction
       );
