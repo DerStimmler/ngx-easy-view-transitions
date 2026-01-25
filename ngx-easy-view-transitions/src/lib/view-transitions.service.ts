@@ -1,22 +1,19 @@
-import { inject, Injectable, RendererFactory2 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { TransitionBase } from './transition-base';
+import { CssRuleManagerService } from './css-rule-manager.service';
 
 /**@internal*/
 @Injectable({ providedIn: 'root' })
 export class ViewTransitionsService {
-  private readonly _rendererFactory = inject(RendererFactory2);
-  private readonly _renderer = this._rendererFactory.createRenderer(null, null);
-  private readonly _document = inject(DOCUMENT);
+  private readonly _cssRuleManager = new CssRuleManagerService(
+    'ngx-easy-view-transitions-rules',
+    `<!-- contains view transition rules of ngx-easy-view-transitions as CSS rules in stylesheet -->`
+  );
 
   setTransition(transitionName: string, animation: TransitionAnimation, direction: ViewTransitionDirection): void {
-    const elementId = `view-transition-${direction}-${transitionName}`;
+    const ruleId = `view-transition-${direction}-${transitionName}`;
 
-    if (this._document.getElementById(elementId)) return;
-
-    const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
-
-    styleElement.innerHTML = `
+    const rule = `
     ::view-transition-${direction === 'in' ? 'new' : 'old'}(${transitionName}){
       animation-name: ${animation.name};
       animation-duration: ${animation.duration}ms;
@@ -26,9 +23,8 @@ export class ViewTransitionsService {
       animation-timing-function: ${animation.timingFunction ?? 'ease'};
     }
     `;
-    styleElement.id = elementId;
 
-    this._renderer.appendChild(this._document.head, styleElement);
+    this._cssRuleManager.setRule(ruleId, rule);
   }
 }
 
