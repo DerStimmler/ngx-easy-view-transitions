@@ -9,14 +9,35 @@ export class ViewTransitionsService {
   private readonly _renderer = this._rendererFactory.createRenderer(null, null);
   private readonly _document = inject(DOCUMENT);
 
+  private readonly _styleSheet: CSSStyleSheet;
+  private readonly _ruleIndexes = new Map<string, number>();
+
+  constructor() {
+    const styleElement = this._document.createElement('style');
+    styleElement.id = 'ngx-easy-view-transitions-rules';
+    this._renderer.appendChild(this._document.head, styleElement);
+    this._styleSheet = styleElement.sheet as CSSStyleSheet;
+  }
+
   setTransition(transitionName: string, animation: TransitionAnimation, direction: ViewTransitionDirection): void {
     const elementId = `view-transition-${direction}-${transitionName}`;
 
-    if (this._document.getElementById(elementId)) return;
+    // If already exists, remove it first
+    if (this._ruleIndexes.has(elementId)) {
+      const index = this._ruleIndexes.get(elementId);
 
-    const styleElement = this._document.getElementById(elementId) || this._document.createElement('style');
+      if (index) {
+        this._styleSheet.deleteRule(index);
+        this._ruleIndexes.delete(elementId);
 
-    styleElement.innerHTML = `
+        // Update indexes of rules that came after the deleted one
+        for (const [key, i] of this._ruleIndexes.entries()) {
+          if (i > index) this._ruleIndexes.set(key, i - 1);
+        }
+      }
+    }
+
+    const rule = `
     ::view-transition-${direction === 'in' ? 'new' : 'old'}(${transitionName}){
       animation-name: ${animation.name};
       animation-duration: ${animation.duration}ms;
@@ -26,9 +47,10 @@ export class ViewTransitionsService {
       animation-timing-function: ${animation.timingFunction ?? 'ease'};
     }
     `;
-    styleElement.id = elementId;
 
-    this._renderer.appendChild(this._document.head, styleElement);
+    // Insert the new rule and store its index
+    const ruleIndex = this._styleSheet.insertRule(rule, this._styleSheet.cssRules.length);
+    this._ruleIndexes.set(elementId, ruleIndex);
   }
 }
 
