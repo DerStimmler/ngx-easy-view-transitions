@@ -20,7 +20,7 @@ npm install ngx-easy-view-transitions
 
 Required Angular version: `>=19.0.0`
 
-You have to enable Angulars built-in view transitions in the Router using the [`withViewTransitions()`](https://angular.io/api/router/withViewTransitions#usage-notes) function.
+You have to enable Angular's built-in view transitions in the Router using the [`withViewTransitions()`](https://angular.io/api/router/withViewTransitions#usage-notes) function.
 
 ```typescript
 bootstrapApplication(AppComponent, {
@@ -32,10 +32,10 @@ bootstrapApplication(AppComponent, {
 
 ### Morph elements
 
-To morph an element during navigation from the old to the new state use the `transitionName` directive and provide the same name on both pages.
+To morph an element during navigation from the old to the new state, use the `transitionName` directive and provide the same name on both pages.
 
 ```typescript
-import {TransitionNameDirective} from 'ngx-easy-view-transitions';
+import { TransitionNameDirective } from 'ngx-easy-view-transitions';
 ```
 
 `users.component.html`
@@ -51,6 +51,13 @@ import {TransitionNameDirective} from 'ngx-easy-view-transitions';
 ```
 
 Note that each `transitionName` must be unique for a page.
+
+Transition names must be valid [`<custom-ident>`](https://developer.mozilla.org/en-US/docs/Web/CSS/custom-ident).
+This library helps with this, by hashing the name to automatically comply.
+
+For debugging purposes, you can show the original provided value as `data-original-view-transition-name` attribute by setting `showOriginalNameAttr` to `true`.
+
+To opt out of hashing, set `preserveName` to `true`.
 
 ### Customize animations
 
@@ -74,8 +81,8 @@ You can simply use a CSS [`@keyframes`](https://developer.mozilla.org/en-US/docs
 ```
 
 ```typescript
-inAnimation = {keyframeName: 'fadeIn', duration: 600};
-outAnimation = {keyframeName: 'fadeIn', duration: 600, reverse: true};
+inAnimation = { keyframeName: 'fadeIn', duration: 600 };
+outAnimation = { keyframeName: 'fadeIn', duration: 600, reverse: true };
 ```
 
 ```angular2html
@@ -84,7 +91,7 @@ outAnimation = {keyframeName: 'fadeIn', duration: 600, reverse: true};
 
 #### Using Keyframe array
 
-When you want to use typed objects instead of CSS you can provide a [`Keyframe`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) array:
+When you want to use typed objects instead of CSS, you can provide a [`Keyframe`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Keyframe_Formats) array:
 
 ```typescript
 const fadeIn: Keyframe[] = [
@@ -100,8 +107,8 @@ const fadeIn: Keyframe[] = [
 ```
 
 ```typescript
-inAnimation = {keyframes: fadeIn, duration: 600};
-outAnimation = {keyframes: fadeIn, duration: 600, reverse: true};
+inAnimation = { keyframes: fadeIn, duration: 600 };
+outAnimation = { keyframes: fadeIn, duration: 600, reverse: true };
 ```
 
 ```angular2html
@@ -127,22 +134,22 @@ animation = {
 
 ### Built-In animations
 
-To start faster there are some built-in animations available under `DefaultTransitions.*`.
+To start faster, there are some built-in animations available under `DefaultTransitions.*`.
 
 ```typescript
-import {DefaultTransitions} from 'ngx-easy-view-transitions';
+import { DefaultTransitions } from 'ngx-easy-view-transitions';
 
-inAnimation = {keyframes: DefaultTransitions.fadeInUp, duration: 600};
+inAnimation = { keyframes: DefaultTransitions.fadeInUp, duration: 600 };
 ```
 
-You can see them in the [demo](https://derstimmler.github.io/ngx-easy-view-transitions/animations) and [here](https://github.com/DerStimmler/ngx-easy-view-transitions/blob/main/ngx-easy-view-transitions/src/lib/default-transitions.ts).
+You can check them out in the [demo](https://derstimmler.github.io/ngx-easy-view-transitions/animations) and [here](https://github.com/DerStimmler/ngx-easy-view-transitions/blob/main/ngx-easy-view-transitions/src/lib/default-transitions.ts).
 
 ### Exclude element from view transitions
 
 When you want to exclude an element from view transitions, you can add the `noTransition` directive.
 
 ```typescript
-import {NoTransitionDirective} from 'ngx-easy-view-transitions';
+import { NoTransitionDirective } from 'ngx-easy-view-transitions';
 ```
 
 ```angular2html
@@ -157,17 +164,9 @@ But you can also provide your own in and out animations by adding the `provideDe
 In the following example, the default animation gets disabled:
 
 ```typescript
-bootstrapApplication(AppComponent,
-  {
-    providers: [
-      provideRouter(appRoutes, withViewTransitions()),
-      provideDefaultViewTransition(
-        {keyframes: DefaultTransitions.none, duration: 0},
-        {keyframes: DefaultTransitions.none, duration: 0}
-      )
-    ]
-  }
-);
+bootstrapApplication(AppComponent, {
+  providers: [provideRouter(appRoutes, withViewTransitions()), provideDefaultViewTransition({ keyframes: DefaultTransitions.none, duration: 0 }, { keyframes: DefaultTransitions.none, duration: 0 })]
+});
 ```
 
 ### Troubleshooting
