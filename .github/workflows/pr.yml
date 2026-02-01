@@ -34,6 +34,9 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      - name: Format
+        run: pnpm exec prettier . --check
+
   lib-compatibility-check:
     name: Library compatibility check
     needs: build
