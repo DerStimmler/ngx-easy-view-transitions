@@ -11,5 +11,15 @@ body {
   margin: 0;
   min-height: 100svh;
   height: 100%;
-  font-family: System-Ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Tiny accessibility helper */
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-blue-600;
 }

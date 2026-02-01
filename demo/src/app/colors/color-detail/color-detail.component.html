@@ -1,43 +1,87 @@
 @if (color) {
-  <div class="flex gap-8 justify-center" style="grid-template-rows: 1fr max-content">
-    <div class="grid place-items-center">
-      <div
-        [style.backgroundColor]="color.hex"
-        [transitionName]="color.name + '-img'"
-        class="h-32 md:h-64 aspect-square rounded-2xl"
-      ></div>
-      <span [transitionName]="color.name" class="font-bold text-xl md:text-3xl">{{ color.name }}</span>
-    </div>
-    <div class="flex flex-col gap-4 justify-center">
-      <p
-        [inAnimation]="{ keyframesName: 'fadeInRight', duration: 300 }"
-        [outAnimation]="{ keyframesName: 'fadeOutRight', duration: 300, fillMode: 'forwards' }"
-        [transitionName]="'description'"
-        class="max-w-[60ch]"
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto max-w-4xl">
+      <!-- Back Button -->
+      <a
+        routerLink="/colors"
+        class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold mb-12 group"
       >
-        {{ color.description }}
-      </p>
-      <div class="flex flex-col gap-1 font-thin text-sm font-mono">
-        <div
-          [inAnimation]="{ keyframes: fadeInUp, duration: 300 }"
-          [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
-          [transitionName]="'properties-hex'"
+        <svg
+          class="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
         >
-          HEX: <span class="font-bold">{{ color.hex }}</span>
-        </div>
-        <div
-          [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 50 }"
-          [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
-          [transitionName]="'properties-rgb'"
-        >
-          RGB: <span class="font-bold">{{ color.rgb }}</span>
-        </div>
-        <div
-          [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 100 }"
-          [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
-          [transitionName]="'properties-hls'"
-        >
-          HLS: <span class="font-bold">{{ color.hls }}</span>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Colors
+      </a>
+
+      <!-- Main Content -->
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 sm:p-12">
+          <!-- Color Display -->
+          <div class="flex flex-col items-center justify-center">
+            <div
+              [style.backgroundColor]="color.hex"
+              [transitionName]="color.name + '-img'"
+              class="w-full aspect-square rounded-2xl shadow-2xl mb-8"
+            ></div>
+            <h1 [transitionName]="color.name" class="text-4xl sm:text-5xl font-bold text-center text-gray-900">
+              {{ color.name }}
+            </h1>
+          </div>
+
+          <!-- Color Details -->
+          <div class="flex flex-col justify-center">
+            <p
+              [inAnimation]="{ keyframesName: 'fadeInRight', duration: 300 }"
+              [outAnimation]="{ keyframesName: 'fadeOutRight', duration: 300, fillMode: 'forwards' }"
+              [transitionName]="'description'"
+              class="text-lg text-gray-700 leading-relaxed mb-8"
+            >
+              {{ color.description }}
+            </p>
+
+            <!-- Color Properties -->
+            <div class="space-y-4">
+              <div
+                [inAnimation]="{ keyframes: fadeInUp, duration: 300 }"
+                [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+                [transitionName]="'properties-hex'"
+                class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600 font-semibold">HEX</span>
+                  <span class="text-lg font-mono font-bold text-blue-700">{{ color.hex }}</span>
+                </div>
+              </div>
+
+              <div
+                [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 50 }"
+                [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+                [transitionName]="'properties-rgb'"
+                class="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-4 border border-purple-200"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600 font-semibold">RGB</span>
+                  <span class="text-lg font-mono font-bold text-purple-700">{{ color.rgb }}</span>
+                </div>
+              </div>
+
+              <div
+                [inAnimation]="{ keyframes: fadeInUp, duration: 300, delay: 100 }"
+                [outAnimation]="{ keyframes: fadeOutDown, duration: 200, fillMode: 'forwards' }"
+                [transitionName]="'properties-hls'"
+                class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-lg p-4 border border-pink-200"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-600 font-semibold">HSL</span>
+                  <span class="text-lg font-mono font-bold text-pink-700">{{ color.hls }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

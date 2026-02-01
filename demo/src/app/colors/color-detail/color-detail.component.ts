@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DefaultTransitions, TransitionNameDirective } from 'ngx-easy-view-transitions';
 import { ColorsService } from '../colors.service';
 
 @Component({
   selector: 'ngx-easy-view-transitions-color-detail',
-  imports: [TransitionNameDirective],
+  imports: [TransitionNameDirective, RouterLink],
   templateUrl: './color-detail.component.html',
   styleUrls: ['./color-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'block'
+  }
 })
 export class ColorDetailComponent {
   protected readonly fadeInUp = DefaultTransitions.fadeInUp;

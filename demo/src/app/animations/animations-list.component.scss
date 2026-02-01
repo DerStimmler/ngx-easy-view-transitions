@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+// Enable scrolling for animation grid on mobile
+@media (max-width: 1024px) {
+  .grid {
+    grid-auto-rows: max-content;
+  }
+}

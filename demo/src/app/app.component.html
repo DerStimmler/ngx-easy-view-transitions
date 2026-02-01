@@ -1,21 +1,43 @@
 <header
-  class="container flex justify-between gap-8 md:gap-12 text-xl sm:text-2xl md:text-4xl lg:text-5xl"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm"
   transitionName="header"
 >
-  <div class="flex gap-4 md:gap-12 items-center">
-    <h1 class="font-bold">ngx-easy-view-transitions</h1>
-    <a [href]="repoUrl" class="repo-link">
-      <img alt="github logo" class="min-w-8 md:min-w-12" height="48" ngSrc="assets/images/github-mark.svg" width="48" />
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <a class="flex gap-3 items-center" routerLink="/">
+      <h1
+        class="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+      >
+        ngx-easy-view-transitions
+      </h1>
+      <a [href]="repoUrl" target="_blank" rel="noopener noreferrer" class="hover:scale-110 transition-transform">
+        <img
+          alt="github logo"
+          class="w-6 h-6 sm:w-8 sm:h-8"
+          height="32"
+          ngSrc="assets/images/github-mark.svg"
+          width="32"
+        />
+      </a>
     </a>
+    <nav class="flex gap-1 sm:gap-2 items-center text-sm sm:text-base">
+      <a
+        class="px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+        routerLink="colors"
+        [routerLinkActive]="['bg-blue-100', 'text-blue-700']"
+      >
+        Demo
+      </a>
+      <a
+        class="px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+        routerLink="animations"
+        [routerLinkActive]="['bg-blue-100', 'text-blue-700']"
+      >
+        Animations
+      </a>
+    </nav>
   </div>
-  <nav class="flex gap-4 md:gap-8 items-center">
-    <a class="hover:underline [&.active-link]:underline" routerLink="colors" routerLinkActive="active-link">Demo</a>
-    <span>|</span>
-    <a class="hover:underline [&.active-link]:underline" routerLink="animations" routerLinkActive="active-link"
-      >Animations</a
-    >
-  </nav>
 </header>
-<main class="container">
+
+<main class="min-h-screen pt-16">
   <router-outlet />
 </main>
