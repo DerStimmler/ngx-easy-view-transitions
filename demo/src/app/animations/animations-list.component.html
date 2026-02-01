@@ -1,36 +1,89 @@
-<div class="grid gap-8 grid-rows-[max-content_max-content_max-content_1fr] h-full items-center">
-  <p>
-    Here you can test all built-in animations. They are available via
-    <span class="font-mono">DefaultTransitions.*</span>
-  </p>
-  <div class="relative w-20 min-w-[200px] h-10">
-    <input
-      (change)="duration.set($any($event).target.value)"
-      [value]="duration()"
-      class="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-gray-900"
-      min="0"
-      type="number"
-    />
-    <label
-      class="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal !overflow-visible truncate peer-placeholder-shown:text-blue-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900 before:border-blue-gray-200 peer-focus:before:!border-gray-900 after:border-blue-gray-200 peer-focus:after:!border-gray-900"
-    >
-      duration in ms
-    </label>
+<!-- Hero Section -->
+<section
+  class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-20 px-4 sm:px-6 lg:px-8"
+>
+  <div class="relative container mx-auto text-center">
+    <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">Built-in Animations</h2>
+    <p class="text-lg sm:text-xl text-indigo-200 mb-12">
+      Explore all available animations accessible via
+      <span class="font-mono bg-indigo-800/50 px-3 py-1 rounded">DefaultTransitions.*</span>
+    </p>
   </div>
-  <div class="grid grid-cols-[repeat(auto-fill,minmax(10rem,1fr))] gap-4 md:gap-8 w-full">
-    @for (animationName of animationNames(); track animationName; let i = $index; let count = $count) {
-      <div
-        (click)="playAnimation(animationName)"
-        [inAnimation]="{ keyframes: scaleIn, delay: i * 10, duration: count * 10 }"
-        [transitionName]="'animation' + i"
-        class="h-12 w-full font-bold rounded-xl cursor-pointer bg-gray-500 p-4 text-white flex justify-center items-center"
-      >
-        {{ animationName }}
-      </div>
-    }
-  </div>
+</section>
 
-  <div class="grid place-items-center">
-    <div class="h-32 w-32 font-bold rounded-xl bg-amber-500 p-4 flex justify-center items-center" id="demo">DEMO</div>
+<!-- Two Column Layout -->
+<section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+  <div class="container mx-auto max-w-7xl py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- Left Column: Animation Selection (Scrollable) -->
+      <div class="flex flex-col max-h-[calc(100vh-10rem)]">
+        <h3 class="text-2xl font-bold mb-6 text-gray-900">Select Animation</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-1 gap-3 overflow-y-auto pr-6 pb-4 pl-4 content-start">
+          @for (animationName of animationNames(); track animationName; let i = $index; let count = $count) {
+            <button
+              (click)="playAnimation(animationName)"
+              [inAnimation]="{ keyframes: scaleIn, delay: i * 10, duration: count * 10 }"
+              [transitionName]="'animation' + i"
+              class="group relative z-0 rounded-lg px-4 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-md hover:shadow-lg hover:z-50 text-left text-sm md:text-base"
+              [style]="
+                'background: linear-gradient(135deg, ' +
+                ['rgb(99, 102, 241)', 'rgb(168, 85, 247)', 'rgb(236, 72, 153)', 'rgb(14, 165, 233)'][i % 4] +
+                ', ' +
+                ['rgb(79, 70, 229)', 'rgb(147, 51, 234)', 'rgb(219, 39, 119)', 'rgb(2, 132, 199)'][i % 4] +
+                ')'
+              "
+            >
+              <span class="relative z-10">{{ animationName }}</span>
+              <div
+                class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity rounded-lg"
+              ></div>
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Right Column: Controls & Demo (Sticky) -->
+      <div class="flex flex-col gap-8 lg:sticky lg:top-20 lg:h-fit">
+        <!-- Duration Control -->
+        <div>
+          <h3 class="text-2xl font-bold mb-6 text-gray-900">Duration & Preview</h3>
+          <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-6 border border-indigo-200">
+            <label class="block">
+              <span class="text-sm font-semibold text-gray-700 mb-3 block">
+                Animation Duration: <span class="text-indigo-600 font-bold">{{ duration() }}ms</span>
+              </span>
+              <input
+                (change)="duration.set($any($event).target.value)"
+                [value]="duration()"
+                type="range"
+                min="100"
+                max="2000"
+                step="50"
+                class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+              />
+              <div class="flex justify-between text-xs text-gray-500 mt-2">
+                <span>100ms</span>
+                <span>2000ms</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Demo Area -->
+        <div class="flex flex-col">
+          <div
+            class="bg-gradient-to-b from-slate-50 to-slate-100 rounded-xl p-8 border-2 border-dashed border-slate-300 flex flex-col items-center justify-center"
+          >
+            <p class="text-gray-600 font-semibold mb-6 text-center">Click an animation to preview</p>
+            <div
+              id="demo"
+              class="h-32 w-32 font-bold rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 p-6 flex flex-col justify-center items-center text-white shadow-2xl"
+            >
+              <span class="block text-center text-sm">DEMO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
