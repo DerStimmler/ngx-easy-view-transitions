@@ -23,9 +23,10 @@
       "cache": true,
       "inputs": [
         "default",
-        "{workspaceRoot}/.eslintrc.json",
-        "{workspaceRoot}/.eslintignore",
-        "{workspaceRoot}/eslint.config.js"
+        "^default",
+        "{workspaceRoot}/eslint.config.mjs",
+        "{workspaceRoot}/eslint.config.js",
+        "{workspaceRoot}/tools/eslint-rules/**/*"
       ]
     },
     "@nx/angular:package": {
@@ -43,7 +44,7 @@
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
       "!{projectRoot}/test-setup.[jt]s",
-      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.mjs",
       "!{projectRoot}/eslint.config.js"
     ],
     "sharedGlobals": []
@@ -115,5 +116,10 @@
       "typeSeparator": "."
     }
   },
-  "useInferencePlugins": false
+  "useInferencePlugins": false,
+  "analytics": false,
+  "neverConnectToCloud": true,
+  "migrate": {
+    "agentic": true
+  }
 }

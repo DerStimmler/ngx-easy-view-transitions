@@ -41,3 +41,8 @@ Thumbs.db
 .nx/cache
 .nx/workspace-data
 .angular
+
+.nx/migrate-runs
+.claude/worktrees
+.nx/polygraph
+.nx/self-healing

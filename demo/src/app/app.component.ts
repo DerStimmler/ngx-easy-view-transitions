@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TransitionNameDirective } from 'ngx-easy-view-transitions';
 import { NgOptimizedImage } from '@angular/common';
@@ -7,6 +7,7 @@ import { NgOptimizedImage } from '@angular/common';
   imports: [RouterModule, TransitionNameDirective, NgOptimizedImage],
   selector: 'ngx-easy-view-transitions-root',
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {

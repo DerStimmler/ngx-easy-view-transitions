@@ -9,3 +9,5 @@
 /.angular
 
 pnpm-lock.yaml
+
+.nx/self-healing
