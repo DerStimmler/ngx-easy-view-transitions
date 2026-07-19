@@ -22,10 +22,7 @@ export default [
           prefix: 'ngx-easy-view-transitions',
           style: 'kebab-case'
         }
-      ],
-      '@angular-eslint/prefer-standalone': 'off',
-      // Newly enabled by the updated Angular ESLint preset; it was not enforced before the upgrade.
-      '@angular-eslint/prefer-on-push-component-change-detection': 'off'
+      ]
     }
   },
   ...nx.configs['flat/angular-template']

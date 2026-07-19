@@ -6,3 +6,5 @@ allowBuilds:
   msgpackr-extract: true
   nx: true
   unrs-resolver: true
+
+minimumReleaseAge: 1440 #24h

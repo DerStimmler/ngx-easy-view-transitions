@@ -7,7 +7,7 @@ import { NgOptimizedImage } from '@angular/common';
   imports: [RouterModule, TransitionNameDirective, NgOptimizedImage],
   selector: 'ngx-easy-view-transitions-root',
   templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {

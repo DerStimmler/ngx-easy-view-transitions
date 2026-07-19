@@ -13,15 +13,12 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "ngx-easy-view-transitions": ["ngx-easy-view-transitions/src/index.ts"]
+      "ngx-easy-view-transitions": ["./ngx-easy-view-transitions/src/index.ts"]
     },
-    "strict": false,
-    "noUncheckedSideEffectImports": false,
-    "types": ["*"],
-    "esModuleInterop": false,
-    "ignoreDeprecations": "6.0"
+    "strict": true,
+    "noUncheckedSideEffectImports": true,
+    "types": ["*"]
   },
   "exclude": ["node_modules", "tmp"]
 }
