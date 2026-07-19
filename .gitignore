@@ -44,3 +44,4 @@ Thumbs.db
 
 .nx/migrate-runs
 .claude/worktrees
+.nx/polygraph
