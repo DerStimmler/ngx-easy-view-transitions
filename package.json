@@ -54,12 +54,15 @@
     "@typescript-eslint/eslint-plugin": "8.64.0",
     "@typescript-eslint/parser": "8.64.0",
     "@typescript-eslint/utils": "8.64.0",
+    "angular-eslint": "^22.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "9.17.0",
     "eslint-config-prettier": "10.0.0",
+    "globals": "^14.0.0",
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.0.5",
     "jest-preset-angular": "17.0.0",
+    "jest-util": "~30.0.0",
     "jsonc-eslint-parser": "^2.4.0",
     "ng-packagr": "22.0.1",
     "nx": "23.1.0",
@@ -70,7 +73,7 @@
     "ts-jest": "29.4.11",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
-    "jest-util": "~30.0.0"
+    "typescript-eslint": "^8.58.0"
   },
   "dependencies": {
     "@angular/animations": "22.0.7",
