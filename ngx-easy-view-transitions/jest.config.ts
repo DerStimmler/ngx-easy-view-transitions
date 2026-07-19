@@ -1,4 +1,3 @@
- 
 export default {
   displayName: 'ngx-easy-view-transitions',
   preset: '../jest.preset.js',

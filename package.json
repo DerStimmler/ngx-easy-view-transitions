@@ -22,7 +22,7 @@
   },
   "homepage": "https://derstimmler.github.io/ngx-easy-view-transitions/",
   "private": true,
-    "engines": {
+  "engines": {
     "node": ">=26.0.0"
   },
   "packageManager": "pnpm@11.11.0",
